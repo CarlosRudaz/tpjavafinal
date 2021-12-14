@@ -1,9 +1,55 @@
 package com.informatorio.tpJavaFinal.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.informatorio.tpJavaFinal.entity.Usuario;
+import com.informatorio.tpJavaFinal.repository.UsuarioRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UsuarioService {
+
+    private final UsuarioRepository usuarioRepository;
+
+    @Autowired
+    public UsuarioService(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    public Usuario crearUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+    
+    public Boolean eliminarUsuario(Long id) {
+        Usuario eliminando = usuarioRepository.getById(id);
+        if(eliminando != null){
+            eliminando.setActivo(false);
+            usuarioRepository.save(eliminando);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public List<Usuario> despuesDeFecha(LocalDateTime fechaDeCreacion) {
+        if (fechaDeCreacion != null) {
+            return usuarioRepository.findByFechaDeCreacionAfter(fechaDeCreacion);
+        } else { 
+            return usuarioRepository.findAll(); 
+        }
+    }
+
+    public List<Usuario> obtenerPorCiudad(String ciudad) {
+        return usuarioRepository.findByCiudad(ciudad);
+    }
+
+}
 
 
-
-import java.util.ArrayList;
+/* import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,4 +99,4 @@ public class UsuarioService {
         }
     }
     
-}
+} */

@@ -19,6 +19,13 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 
 /*
+        CAMBIO
+@Query("from Usuario where fechaDeCreacion >= ?1")
+    List<Usuario> findByFechaDeCreacion(LocalDateTime fechaDeCreacion);
+
+
+
+        VIEJO
 import java.util.ArrayList;
 
 import com.informatorio.tpJavaFinal.entity.Usuario;

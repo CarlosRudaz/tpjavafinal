@@ -43,7 +43,7 @@ public class Emprendimiento {
     
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Usuario owner;
+    private Usuario jefe;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
@@ -57,11 +57,11 @@ public class Emprendimiento {
     private String descripcion;
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public List<String> getUrl() {
-        return url;
+        return this.url;
     }
 
     public void setUrl(ArrayList<String> url) {
@@ -69,7 +69,7 @@ public class Emprendimiento {
     }
 
     public Boolean getPublicado() {
-        return publicado;
+        return this.publicado;
     }
 
     public void setPublicado(Boolean publicado) {
@@ -77,7 +77,7 @@ public class Emprendimiento {
     }
 
     public float getObjetivo() {
-        return objetivo;
+        return this.objetivo;
     }
 
     public void setObjetivo(float objetivo) {
@@ -85,7 +85,7 @@ public class Emprendimiento {
     }
 
     public String getCategoria() {
-        return categoria;
+        return this.categoria;
     }
 
     public void setCategoria(String categoria) {
@@ -93,7 +93,7 @@ public class Emprendimiento {
     }
 
     public String getContenido() {
-        return contenido;
+        return this.contenido;
     }
 
     public void setContenido(String contenido) {
@@ -101,7 +101,7 @@ public class Emprendimiento {
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -109,7 +109,7 @@ public class Emprendimiento {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion;
     }
 
     public void setDescripcion(String descripcion) {
@@ -117,11 +117,11 @@ public class Emprendimiento {
     }
 
     public Usuario getOwner() {
-        return owner;
+        return this.jefe;
     }
 
-    public void setOwner(Usuario owner) {
-        this.owner = owner;
+    public void setOwner(Usuario jefe) {
+        this.jefe = jefe;
     }
 
     public void agregarTag(Tag tag) {
@@ -135,7 +135,7 @@ public class Emprendimiento {
     }
 
     public List<Tag> getTags() {
-        return tags;
+        return this.tags;
     }
 }
 
