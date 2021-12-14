@@ -1,7 +1,6 @@
 package com.informatorio.tpJavaFinal.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -14,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +41,7 @@ public class UsuarioController {
     }
 
     //modificado 
-    @DeleteMapping( path = "/{id}")
+    @PutMapping( value = "/{id}")
     public String eliminarPorId(@PathVariable("id") Long id){
         final boolean ok = this.usuarioService.eliminarUsuario(id);
         if (ok){
@@ -70,10 +69,8 @@ public class UsuarioController {
 
     @GetMapping()
     public ResponseEntity<?> obtenerTodosLosUsuarios(
-                @RequestParam(name = "fecha", required = false)
-                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fechaDeCreacion,
                 @RequestParam(name = "ciudad", required = false) String ciudad) {
-        return new ResponseEntity<>(usuarioService.despuesDeFecha(fechaDeCreacion), HttpStatus.OK);
+        return new ResponseEntity<>(usuarioService.obtenerPorCiudad(ciudad), HttpStatus.OK);
     }
 }
 

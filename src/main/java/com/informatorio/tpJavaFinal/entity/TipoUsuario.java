@@ -2,7 +2,13 @@ package com.informatorio.tpJavaFinal.entity;
 
 
 public enum TipoUsuario {
-    USUARIO(1),
+
+
+    USUARIO,
+    COLABORADOR,
+    OWNER;
+
+    /* USUARIO(1),
     COLABORADOR(2),
     OWNER(3);
 
@@ -29,6 +35,6 @@ public enum TipoUsuario {
     public int getId(){
         return id;
     }
-
+ */
 
 }

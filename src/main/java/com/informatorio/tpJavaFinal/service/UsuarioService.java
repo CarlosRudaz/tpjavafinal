@@ -24,16 +24,19 @@ public class UsuarioService {
     }
     
     public Boolean eliminarUsuario(Long id) {
-        Usuario eliminando = usuarioRepository.getById(id);
-        if(eliminando != null){
+        
+        try {
+            Usuario eliminando = usuarioRepository.getById(id);
             eliminando.setActivo(false);
             usuarioRepository.save(eliminando);
+            
             return true;
-        }else{
+        } catch (Exception err) {
             return false;
         }
     }
-    
+        
+
     public List<Usuario> despuesDeFecha(LocalDateTime fechaDeCreacion) {
         if (fechaDeCreacion != null) {
             return usuarioRepository.findByFechaDeCreacionAfter(fechaDeCreacion);

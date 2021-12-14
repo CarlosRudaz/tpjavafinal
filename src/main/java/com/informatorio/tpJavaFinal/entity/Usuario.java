@@ -27,7 +27,7 @@ public class Usuario {
     @NotEmpty(message = "el email debe ser valido")
     @Column(unique = true)
     @Email(regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
-    private String email;
+    private String username;
 
     @NotEmpty(message = "password no deberia estar vacio")
     private String password;
@@ -74,11 +74,11 @@ public class Usuario {
     }
 
     public String getEmail() {
-        return this.email;
+        return this.username;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.username = email;
     }
 
     public String getPassword() {
