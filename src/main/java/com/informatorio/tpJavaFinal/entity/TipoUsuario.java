@@ -6,7 +6,7 @@ public enum TipoUsuario {
 
     USUARIO,
     COLABORADOR,
-    OWNER;
+    JEFE;
 
     /* USUARIO(1),
     COLABORADOR(2),

@@ -1,7 +1,5 @@
 package com.informatorio.tpJavaFinal.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -17,7 +15,6 @@ public class OperacionEmprendimiento {
 
     @NotNull
     @Positive
-    @JsonProperty(value = "id_usuario")
     private Long idUsuario;
 
     private List<Long> tags;

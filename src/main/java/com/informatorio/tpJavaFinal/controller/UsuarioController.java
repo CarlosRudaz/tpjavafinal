@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
-@RequestMapping(value = "usuario")
+@RequestMapping(value = "/usuario")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -55,22 +55,29 @@ public class UsuarioController {
     public Usuario modificarUsuario(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario) {
         return this.usuarioService.modificarUsuario(id);
     } */
-    
-    @GetMapping(params = "fechaDesde")
-    public ResponseEntity<?> obtenerTodos(
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDesde) {
-        if (fechaDesde != null) {
+    /* 
+    @GetMapping
+    public ResponseEntity<?> obtenerFechaDesde(
+            @RequestParam(name = "fechaDesde", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDesde) {
             List<Usuario> usuarios = usuarioRepository.findByFechaDeCreacionAfter(fechaDesde.atStartOfDay());
-            return new ResponseEntity<>(usuarios, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(usuarioRepository.findAll(), HttpStatus.OK);
-    }
+            return new ResponseEntity<>(usuarios, HttpStatus.OK);        
+    } */
 
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<?> obtenerTodosLosUsuarios(
-                @RequestParam(name = "ciudad", required = false) String ciudad) {
-        return new ResponseEntity<>(usuarioService.obtenerPorCiudad(ciudad), HttpStatus.OK);
+                                @RequestParam(name = "ciudad", required = false) String ciudad,
+                                @RequestParam(name = "fechaDesde", required = false) 
+                                @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaDesde) {
+        if (ciudad != null) {            
+            return new ResponseEntity<>(usuarioService.obtenerPorCiudad(ciudad), HttpStatus.OK);
+        }else if(fechaDesde != null){
+            List<Usuario> usuarios = usuarioRepository.findByFechaDeCreacionAfter(fechaDesde.atStartOfDay());
+            return new ResponseEntity<>(usuarios, HttpStatus.OK);     
+        }else{
+            return new ResponseEntity<>(usuarioRepository.findAll(), HttpStatus.OK);
+        }
+        
     }
 }
 
